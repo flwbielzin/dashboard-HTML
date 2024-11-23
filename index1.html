@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Controle Financeiro</title>
+    <!-- ======= Estilos ====== -->
+    <link rel="stylesheet" href="assets/css/style.css">
+</head>
+
+<body>
+    <!-- =============== Navegação ================ -->
+    <div class="container">
+        <div class="navigation">
+            <ul>
+                <li>
+                    <a href="dashboard.html">
+                        <span class="icon">
+                            <ion-icon name="logo-apple"></ion-icon>
+                        </span>
+                        <span class="title">Controle Financeiro</span>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="#">
+                        <span class="icon">
+                            <ion-icon name="home-outline"></ion-icon>
+                        </span>
+                        <span class="title">Painel</span>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="transicoes.html">
+                        <span class="icon">
+                            <ion-icon name="wallet-outline"></ion-icon>
+                        </span>
+                        <span class="title">Transações</span>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="resumomensal.html">
+                        <span class="icon">
+                            <ion-icon name="analytics-outline"></ion-icon>
+                        </span>
+                        <span class="title">Resumo Mensal</span>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="configuracao.html">
+                        <span class="icon">
+                            <ion-icon name="settings-outline"></ion-icon>
+                        </span>
+                        <span class="title">Configurações</span>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="../login/login.html">
+                        <span class="icon">
+                            <ion-icon name="log-out-outline"></ion-icon>
+                        </span>
+                        <span class="title">Sair</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+
+        <!-- ========================= Principal ==================== -->
+        <div class="main">
+            <div class="topbar">
+                <div class="toggle">
+                    <ion-icon name="menu-outline"></ion-icon>
+                </div>
+
+                <div class="search">
+                    <label>
+                        <input type="text" placeholder="Pesquise aqui">
+                        <ion-icon name="search-outline"></ion-icon>
+                    </label>
+                </div>
+
+                <div class="user">
+                    <img src="assets/imgs/bitmoji.png" alt="">
+                </div>
+            </div>
+
+            <!-- ======================= Cartões ================== -->
+            <div class="cardBox">
+                <div class="card">
+                    <div>
+                        <div class="cardName">Saldo Disponível</div>
+                        <div class="numbers"></div>
+                    </div>
+
+                    <div class="iconBx">
+                        <ion-icon name="cash-outline"></ion-icon>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div>
+                        
+                        <div class="cardName">Receitas</div>
+                        <div class="numbers"></div>
+                    </div>
+
+                    <div class="iconBx">
+                        <ion-icon name="trending-up-outline"></ion-icon>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div>
+                        <div class="cardName">Despesas</div>
+                        <div class="numbers"></div>
+                        
+                    </div>
+
+                    <div class="iconBx">
+                        <ion-icon name="trending-down-outline"></ion-icon>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- =========== Scripts =========  -->
+    <script src="assets/js/dashbaord.js"></script>
+    <script>
+        document.getElementById("calcular").addEventListener("click", function() {
+            let valor = parseFloat(document.getElementById("valor").value);
+            let parcelas = parseInt(document.getElementById("parcelas").value);
+
+            if (!isNaN(valor) && !isNaN(parcelas) && parcelas > 0) {
+                let totalCompra = valor * parcelas;
+                document.getElementById("totalCompra").innerText = `R$ ${totalCompra.toFixed(2)}`;
+            } else {
+                alert("Por favor, insira valores válidos.");
+            }
+        });
+    </script>
+
+    <!-- ====== ionicons ======= -->
+    <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+</body>
+
+</html>
