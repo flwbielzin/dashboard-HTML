@@ -1,0 +1,224 @@
+/* Estilo para o header fixo */
+header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background-color: #3f3f3f;
+  padding: 10px 20px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  z-index: 1000;
+}
+
+/* Estilo para o h1 dentro do header */
+header h1 {
+  font-size: 2rem;
+  color: #ffffff;
+  margin: 0;
+  text-align: left;
+}
+
+/* Estilo para o logo fixo */
+header .logo {
+  position: fixed;
+  top: 10px;
+  left: 360px;
+  z-index: 1000;
+  width: 40px;
+}
+
+/* Estilo básico do body */
+body {
+  font-family: Arial, sans-serif;
+  background-color: #2f2f2f;
+  color: white;
+  margin: 0;
+  padding: 0;
+  padding-top: 70px;
+}
+
+/* Estilo para a Sidebar (left-side) */
+.left-side {
+  position: fixed; /* Fixa a sidebar no lado esquerdo da tela */
+  top: 70px; /* Ajusta a posição para abaixo do header */
+  left: 0; /* Coloca a sidebar na parte esquerda */
+  width: 300px; /* Largura da sidebar */
+  height: calc(
+    100vh - 70px
+  ); /* Faz a sidebar ocupar a altura total da tela, subtraindo a altura do header */
+  padding: 20px;
+  background-color: #444;
+  border-radius: 8px;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  box-sizing: border-box; /* Inclui o padding no cálculo da largura */
+  overflow-y: auto; /* Adiciona rolagem vertical se o conteúdo for maior que a altura da tela */
+}
+
+/* Estilo para os itens na Sidebar */
+.left-side label,
+.left-side input,
+.left-side select,
+.left-side button {
+  width: 100%; /* Garante que os inputs e botões ocupem toda a largura disponível */
+  padding: 10px;
+  margin-bottom: 10px;
+  border-radius: 5px;
+  border: none;
+  outline: none;
+  color: rgb(0, 0, 0);
+  
+  box-sizing: border-box; /* Inclui o padding e a borda no cálculo do tamanho total */
+}
+
+/* Estilo dos botões na Sidebar */
+.left-side button {
+  background-color: #ad03fc;
+  color: white;
+  cursor: pointer;
+}
+
+.left-side button:hover {
+  background-color: #9b03e6;
+}
+
+/* Estilo do conteúdo principal (container) */
+.container {
+  margin-left: 320px; /* Cria um espaço à esquerda para a sidebar */
+  padding: 20px;
+  background-color: #333;
+  border-radius: 8px;
+}
+.container1 {
+    margin: 0 auto; /* Centraliza a div horizontalmente */
+    padding: 20px;
+    background-color: #333;
+    border-radius: 8px;
+    width: 80%; /* Define uma largura máxima para a centralização */
+    max-width: 1200px; /* Define um limite para a largura */
+    box-sizing: border-box; /* Inclui o padding no cálculo da largura */
+}
+.grafico {
+    margin: 0 auto; /* Centraliza a div horizontalmente */
+    padding: 20px;
+    background-color: #333;
+    border-radius: 8px;
+    width: 80%; /* Define uma largura máxima para a centralização */
+    max-width: 1200px; /* Define um limite para a largura */
+    box-sizing: border-box; /* Inclui o padding no cálculo da largura */
+}
+
+
+
+
+/* Estilo para a coluna direita */
+.right-side {
+  width: 50%;
+  padding: 20px;
+  background-color: #444;
+  border-radius: 8px;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  box-sizing: border-box;
+}
+
+/* Estilo para as seções dentro do container */
+.section {
+  margin-bottom: 20px;
+}
+
+/* Garantir que os inputs, selects e botões respeitem o espaço do container */
+input,
+select,
+button {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 10px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  box-sizing: border-box;
+}
+
+/* Estilo dos botões */
+button {
+  background-color: #ad03fc;
+  color: white;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #9b03e6;
+}
+
+/* Estilo da tabela */
+table {
+  width: 100%;
+  margin-top: 20px;
+  border-collapse: collapse;
+}
+
+table th,
+table td {
+  padding: 10px;
+  border: 1px solid #ccc;
+  text-align: center;
+}
+
+table th {
+  background-color: #333;
+}
+
+table td {
+  background-color: #444;
+}
+
+/* Estilo para o salário */
+#salario-info {
+  margin-top: 20px;
+}
+
+/* Para telas menores que 768px (tablets e celulares em modo paisagem) */
+@media screen and (max-width: 768px) {
+    .container, .container1{
+        flex-direction: column; /* Empilha as colunas */
+        gap: 10px;
+    }
+
+    .left-side,
+    .right-side {
+        width: 100%; /* As colunas ficam com 100% de largura */
+    }
+
+    .right-side {
+        display: none; /* A coluna direita é escondida por padrão */
+    }
+
+    #toggle-right-side {
+        display: block; /* O botão de mostrar/esconder aparece */
+        margin-top: 20px;
+        background-color: #ad03fc;
+        color: white;
+        padding: 10px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        text-align: center;
+        width: 100%;
+    }
+
+    #toggle-right-side:hover {
+        background-color: #9b03e6;
+    }
+}
+
+/* Para telas maiores que 768px (telas não responsivas) */
+@media screen and (min-width: 769px) {
+    .right-side {
+        display: block; /* A coluna direita está visível */
+    }
+
+    #toggle-right-side {
+        display: none; /* O botão é ocultado em telas grandes */
+    }
+}
+
+
+  
