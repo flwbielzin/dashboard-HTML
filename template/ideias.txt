@@ -1,0 +1,7 @@
+1 Lembretes de Pagamento: Adicione a funcionalidade de alertas ou lembretes para parcelas de compras ou contas a pagar. 
+
+4 Ícones e Gráficos: Utilize ícones visuais, como gráficos de barras ou pizza, para representar as categorias de despesas e facilitar a visualização dos dados. 
+5 Armazenamento em Banco de Dados: Em vez de salvar os dados localmente em arquivos, você pode integrar um banco de dados para armazenar as transações e informações dos usuários de maneira mais segura e eficiente. 
+
+
+8 Metas de Economia: Ofereça a opção de o usuário definir metas de economia, com gráficos e alertas para avisá-los quando estiverem se aproximando ou atingindo essas metas.

@@ -1,0 +1,300 @@
+/* Estilo para o header fixo */
+header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background-color: #3f3f3f;
+  padding: 10px 20px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  z-index: 1000;
+}
+
+/* Estilo para o h1 dentro do header */
+header h1 {
+  font-size: 2rem;
+  color: #ffffff;
+  margin: 0;
+  text-align: left;
+}
+
+/* Estilo para o logo fixo */
+header .logo {
+  position: absolute;
+  top: 10px;
+  left: 20px; /* Ajustado para evitar sobreposição com o título */
+  z-index: 1001;
+  width: 40px;
+}
+
+/* Estilo básico do body */
+body {
+  font-family: Arial, sans-serif;
+  background-color: #2f2f2f;
+  color: white;
+  margin: 0;
+  padding: 0;
+  padding-top: 70px; /* Deixando espaço para o header fixo */
+}
+
+/* Estilo para a Sidebar (left-side) */
+.left-side {
+  position: fixed;
+  top: 70px; /* Ajusta a posição para abaixo do header */
+  left: 0;
+  width: 300px;
+  height: calc(100vh - 70px);
+  padding: 20px;
+  background-color: #444;
+  border-radius: 8px;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  box-sizing: border-box;
+  overflow-y: auto;
+  z-index: 999;
+}
+
+/* Estilo para os itens na Sidebar */
+.left-side label,
+.left-side input,
+.left-side select,
+.left-side button {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 10px;
+  border-radius: 5px;
+  border: none;
+  outline: none;
+  color: rgb(0, 0, 0);
+  box-sizing: border-box;
+}
+
+/* Estilo dos botões na Sidebar */
+.left-side button {
+  background-color: #ad03fc;
+  color: white;
+  cursor: pointer;
+}
+
+.left-side button:hover {
+  background-color: #9b03e6;
+}
+
+.voltar-topo {
+  color: black;
+  background-color: transparent;
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: bold;
+  cursor: pointer;
+  border: 10px;
+  padding: 0;
+  text-align: left; /* Alinha à esquerda dentro do contêiner */
+  margin-left: 0; /* Garante que não há espaçamento à esquerda */
+}
+
+.voltar-topo:hover {
+  color: #6a02b2; /* Cor do texto ao passar o mouse (mais suave que o roxo) */
+}
+
+header h1 {
+  color: #9b03e6;
+
+}
+
+/* Estilo do conteúdo principal (container) */
+.container {
+  margin-left: 320px;
+  padding: 20px;
+  background-color: #333;
+  border-radius: 8px;
+  z-index: 998;
+}
+.container1 {
+  margin: 60px auto 0; /* Adiciona 40px de espaço no topo e centraliza horizontalmente */
+  padding: 20px;
+  background-color: #333;
+  border-radius: 8px;
+  z-index: 998;
+  max-width: 1200px; /* Define o tamanho máximo */
+  width: 90%; /* Faz com que a largura seja 90% da tela */
+}
+
+.container2 {
+  margin-left: 320px;
+  padding: 20px;
+  background-color: #333;
+  border-radius: 8px;
+  z-index: 998;
+}
+
+/* Estilo para a coluna direita (Histórico) */
+.right-side {
+  width: 50%;
+  padding: 20px;
+  background-color: #444;
+  border-radius: 8px;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  margin-top: 20px;
+  z-index: 997;
+}
+
+/* Estilo para as seções dentro do container */
+.section {
+  margin-bottom: 20px;
+}
+
+/* Garantir que os inputs, selects e botões respeitem o espaço do container */
+input,
+select,
+button {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 10px;
+  border-radius: 5px;
+  border: 1px solid #ad03fc;
+  box-sizing: border-box;
+}
+
+/* Estilo da tabela */
+table {
+  width: 100%;
+  margin-top: 20px;
+  border-collapse: collapse;
+}
+
+table th,
+table td {
+  padding: 10px;
+  border: 1px solid #ad03fc;
+  text-align: center;
+}
+
+table th {
+  background-color: #333;
+}
+
+table td {
+  background-color: #444;
+}
+.right-side button {
+  background-color: #ad03fc;
+  color: white;
+  cursor: pointer;
+}
+
+/* Estilo para o salário */
+#salario-info {
+  margin-top: 20px;
+}
+
+/* Botão para Mostrar/Esconder a Coluna Direita */
+#toggle-right-side {
+  display: none;
+  margin: 20px auto;
+  background-color: #ad03fc;
+  color: #ad03fc;
+  padding: 10px 15px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  text-align: center;
+  width: 80%;
+  max-width: 300px;
+}
+
+#toggle-right-side:hover {
+  background-color: #9b03e6;
+}
+
+/* Responsividade para telas menores */
+@media (max-width: 768px) {
+  /* Ajustando a sidebar e a coluna direita para ficarem empilhadas em telas menores */
+  .left-side {
+    position: relative;
+    width: 100%;
+    height: auto;
+    padding: 10px;
+    margin-top: 20px;
+    box-sizing: border-box;
+    z-index: 999;
+  }
+
+  .container,
+  .container1,
+  .container2 {
+    margin-left: 0;
+    padding: 10px;
+  }
+
+  .right-side {
+    position: relative;
+    width: 100%;
+    height: auto;
+    padding: 10px;
+    margin-top: 20px;
+    box-sizing: border-box;
+    z-index: 999;
+  }
+
+  /* Ajustando o tamanho da fonte para dispositivos móveis */
+  header h1 {
+    font-size: 1.5rem;
+  }
+
+  /* Ajustando o logo para telas pequenas */
+  header .logo {
+    width: 30px;
+  }
+
+  /* Ajustando o estilo da tabela */
+  table {
+    width: 100%;
+    table-layout: auto; /* Permite que a largura das colunas se ajustem ao conteúdo */
+  }
+
+  table th,
+  table td {
+    padding: 6px; /* Menos padding para economizar espaço */
+    font-size: 0.65rem; /* Diminuindo o tamanho da fonte */
+    overflow: visible; /* Deixa o conteúdo visível */
+    word-wrap: break-word; /* Permite que o texto quebre para a linha seguinte */
+  }
+
+  /* Ajuste na coluna "Excluir" */
+  table td:last-child {
+    width: 20%; /* Ajuste a largura da coluna "Excluir" */
+  }
+
+  /* Ajustando o botão da coluna direita */
+  .right-side button {
+    width: 100%; /* O botão vai ocupar toda a largura disponível */
+    margin-top: 20px; /* Adiciona um espaçamento superior */
+    padding: 15px; /* Ajusta o padding do botão */
+  }
+
+  /* Exibindo o botão para mostrar/ocultar a coluna direita */
+  #toggle-right-side {
+    display: block; /* Torna o botão visível */
+    margin: 20px auto; /* Centraliza horizontalmente */
+    background-color: #ad03fc;
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    text-align: center;
+    width: 80%; /* Largura ajustável */
+    max-width: 300px;
+  }
+
+  #toggle-right-side:hover {
+    background-color: #9b03e6;
+  }
+
+  /* Escondendo a coluna de "Excluir" em telas menores */
+  @media (max-width: 480px) {
+    table td:last-child {
+      display: none; /* Oculta a coluna "Excluir" */
+    }
+  }
+}

@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Controle de Finanças</title>
+    <link rel="stylesheet" href="./template/style.css">
+    <script src="./template/script.js" defer></script>
+</head>
+
+<body>
+    <header>
+        <h1>Controle de Finanças</h1>
+        <img src="./img/team flwbielzin.png" alt="Logo da Empresa" class="logo">
+    </header>
+
+    <div class="container">
+        <!-- Divisão em 2 colunas -->
+        <div class="left-side">
+            <!-- Definir Salário -->
+            <div class="section">
+                <label for="salario">Defina seu Salário:</label>
+                <input type="number" id="salario" placeholder="R$ 0,00">
+                <button onclick="salvarSalario()">Salvar Salário</button>
+            </div>
+
+            <div id="salario-info">
+                <!-- Exibirá salário e saldo disponível -->
+            </div>
+
+            <!-- Formulário para Adicionar Transações -->
+            <div class="section">
+                <label for="descricao">Descrição:</label>
+                <input type="text" id="descricao">
+
+                <label for="valor">Valor:</label>
+                <input type="number" id="valor">
+
+                <label for="parcelas">Número de Parcelas:</label>
+                <input type="number" id="parcelas">
+
+                <label for="categoria">Categoria:</label>
+                <input type="text" id="categoria">
+
+                <label for="tipo">Tipo de Compra:</label>
+                <select id="tipo">
+                    <option value="Compra Fixa">Compra Fixa</option>
+                    <option value="Compra Variável">Compra Variável</option>
+                </select>
+
+                <label for="data">Data de Compra:</label>
+                <input type="date" id="data">
+
+                <button onclick="adicionarTransacao()">Adicionar Transação</button>
+            </div>
+        </div>
+
+        <!-- Botão para Mostrar/Esconder a Coluna Direita -->
+        <button id="toggle-right-side">Mostrar/Esconder Coluna Direita</button>
+    </div>
+
+    <div class="container2">
+        <!-- Área direita: Tabela de Transações -->
+        <div class="right-side">
+            <table id="transacoes">
+                <thead>
+                    <tr>
+                        <th>Descrição</th>
+                        <th>Valor</th>
+                        <th>Tipo</th>
+                        <th>Categoria</th>
+                        <th>Data</th>
+                        <th>Valor Total</th>
+                        <th>Excluir</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- As transações serão inseridas aqui -->
+                </tbody>
+            </table>
+
+            <!-- Botão para acessar o Histórico de Transações -->
+            <button onclick="window.location.href='./historico.html'">Ver Histórico de Transações</button>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</body>
+
+</html>

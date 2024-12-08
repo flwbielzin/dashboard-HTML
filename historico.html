@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Histórico de Transações - Controle de Finanças</title>
+    <link rel="stylesheet" href="./template/style.css">
+    <script src="script.js" defer></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.17.1/xlsx.full.min.js"></script>
+</head>
+<header>
+    <h1>Histórico de Transações</h1>
+   
+    <!-- Botão de Voltar ao Início -->
+    <button onclick="window.location.href ='index1.html'" class="voltar-topo">Voltar ao Início</button>
+</header>
+
+
+<body>
+
+    <div class="container1">
+        <h1>Histórico de Transações</h1>
+
+        <!-- Filtros de Transações -->
+        <div class="filters">
+            <label for="dataInicio">Data Início:</label>
+            <input type="date" id="dataInicio">
+
+            <label for="dataFim">Data Fim:</label>
+            <input type="date" id="dataFim">
+
+            <label for="categoriaFiltro">Categoria:</label>
+            <input type="text" id="categoriaFiltro" placeholder="Categoria">
+
+            <label for="tipoFiltro">Tipo:</label>
+            <select id="tipoFiltro">
+                <option value="">Selecione</option>
+                <option value="Compra Fixa">Compra Fixa</option>
+                <option value="Compra Variável">Compra Variável</option>
+            </select>
+
+            <button onclick="filtrarTransacoes()">Filtrar</button>
+        </div>
+
+        <!-- Tabela de Histórico de Transações -->
+        <table id="tabelaTransacoes">
+            <thead>
+                <tr>
+                    <th>Descrição</th>
+                    <th>Valor</th>
+                    <th>Tipo</th>
+                    <th>Categoria</th>
+                    <th>Data</th>
+                    <th>Status</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- As transações serão exibidas aqui -->
+            </tbody>
+        </table>
+
+        <!-- Botões para Salvar os Dados -->
+        <div id="grafico">
+
+            <button onclick="salvarExcel()">Salvar como Excel</button>
+        </div>
+
+    </div>
+
+    <script>
+        // Função para filtrar transações
+        function filtrarTransacoes() {
+            const dataInicio = document.getElementById("dataInicio").value;
+            const dataFim = document.getElementById("dataFim").value;
+            const categoriaFiltro = document.getElementById("categoriaFiltro").value;
+            const tipoFiltro = document.getElementById("tipoFiltro").value;
+
+            let url = '/filtrar?';
+
+            if (dataInicio) url += `data_inicio=${dataInicio}&`;
+            if (dataFim) url += `data_fim=${dataFim}&`;
+            if (categoriaFiltro) url += `categoria=${categoriaFiltro}&`;
+            if (tipoFiltro) url += `tipo=${tipoFiltro}&`;
+
+            // Requisição AJAX para o backend
+            fetch(url)
+                .then(response => response.json())
+                .then(transacoes => {
+                    mostrarTransacoes(transacoes);
+                });
+        }
+
+        // Função para exibir as transações na tabela
+        function mostrarTransacoes(transacoes) {
+            const tabela = document.getElementById("tabelaTransacoes").getElementsByTagName('tbody')[0];
+            tabela.innerHTML = ""; // Limpa a tabela
+
+            // Exibe as transações
+            transacoes.forEach(transacao => {
+                const row = tabela.insertRow();
+                row.insertCell(0).textContent = transacao.descricao;
+                row.insertCell(1).textContent = `R$ ${transacao.valor.toFixed(2)}`;
+                row.insertCell(2).textContent = transacao.tipo_transacao;
+                row.insertCell(3).textContent = transacao.categoria;
+                row.insertCell(4).textContent = transacao.data;
+                row.insertCell(5).textContent = transacao.status;
+
+                // Adiciona a classe para alerta visual
+                if (transacao.tipo_transacao === "despesa" && transacao.valor > salario) {
+                    row.classList.add('vencido');
+                } else {
+                    row.classList.add('normal');
+                }
+            });
+        }
+
+        // Função para salvar os dados em um arquivo .txt
+        function salvarDados() {
+            const tabela = document.getElementById("tabelaTransacoes");
+            const linhas = tabela.getElementsByTagName("tr");
+            let texto = "Descrição\tValor\tTipo\tCategoria\tData\tStatus\n"; // Cabeçalho do arquivo
+
+            // Loop para adicionar os dados da tabela
+            for (let i = 1; i < linhas.length; i++) {
+                const colunas = linhas[i].getElementsByTagName("td");
+                texto += `${colunas[0].textContent}\t${colunas[1].textContent}\t${colunas[2].textContent}\t${colunas[3].textContent}\t${colunas[4].textContent}\t${colunas[5].textContent}\n`;
+            }
+
+            // Cria o arquivo e faz o download
+            const blob = new Blob([texto], { type: 'text/plain;charset=utf-8' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'historico_transacoes.txt';
+            a.click();
+            URL.revokeObjectURL(url);
+        }
+
+        // Função para salvar os dados como arquivo Excel
+        function salvarExcel() {
+            const tabela = document.getElementById("tabelaTransacoes");
+            const wb = XLSX.utils.table_to_book(tabela, { sheet: "Histórico de Transações" });
+
+            // Faz o download do arquivo Excel
+            XLSX.writeFile(wb, "historico_transacoes.xlsx");
+        }
+    </script>
+
+
+
+</body>
+
+</html>
