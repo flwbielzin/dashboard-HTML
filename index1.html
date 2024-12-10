@@ -52,6 +52,14 @@
                 <label for="data">Data de Compra:</label>
                 <input type="date" id="data">
 
+                <!-- Adicionado: Checkbox para marcar se é transação de cartão -->
+                <label for="cartao">Cartão de Crédito:</label>
+                <input type="checkbox" id="cartao">
+
+                <!-- Adicionado: Campo para data de vencimento -->
+                <label for="vencimento">Data de Vencimento:</label>
+                <input type="date" id="vencimento">
+
                 <button onclick="adicionarTransacao()">Adicionar Transação</button>
             </div>
         </div>
@@ -71,7 +79,9 @@
                         <th>Tipo</th>
                         <th>Categoria</th>
                         <th>Data</th>
+                        <th>Parcelas</th>
                         <th>Valor Total</th>
+                        <th>Status</th>
                         <th>Excluir</th>
                     </tr>
                 </thead>
