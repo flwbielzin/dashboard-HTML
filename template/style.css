@@ -22,7 +22,7 @@ header h1 {
 header .logo {
   position: absolute;
   top: 10px;
-  left: 20px; /* Ajustado para evitar sobreposição com o título */
+  left: 350px; /* Ajustado para evitar sobreposição com o título */
   z-index: 1001;
   width: 40px;
 }
