@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Controle de Finanças</title>
+    <link rel="stylesheet" href="./template/style.css">
+    <script src="./template/script.js" defer></script>
+    <style>
+        .cartao {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            padding: 10px;
+            margin: 10px 0;
+        }
+
+        .cartao img {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+        }
+
+        .formulario {
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <h1>Controle de Finanças</h1>
+        <img src="./img/team flwbielzin.png" alt="Logo da Empresa" class="logo">
+         <!-- Botão de Voltar ao Início -->
+    <button onclick="window.location.href ='index1.html'" class="voltar-topo">Voltar ao Início</button>
+    </header>
+
+    <div class="container">
+        <!-- Divisão em 2 colunas -->
+        <div class="left-side">
+            <!-- Formulário para adicionar cartão -->
+            <div class="section formulario">
+                <h2>Adicionar Cartão</h2>
+                <label for="nome-cartao">Nome do cartão:</label>
+                <input type="text" id="nome-cartao" placeholder="Ex.: Nubank">
+
+                <label for="icone-cartao">URL do ícone:</label>
+                <input type="text" id="icone-cartao" placeholder="Ex.: https://imagem.com/icone.png">
+
+                <label for="limite-cartao">Limite do cartão:</label>
+                <input type="number" id="limite-cartao" placeholder="R$ 0,00">
+
+                <label for="fechamento">Dia de fechamento:</label>
+                <input type="number" id="fechamento" placeholder="Ex.: 28">
+
+                <label for="vencimento">Dia de vencimento:</label>
+                <input type="number" id="vencimento" placeholder="Ex.: 4">
+
+                <button onclick="adicionarCartao()">Adicionar Cartão</button>
+            </div>
+
+            <!-- Exibição dos cartões configurados -->
+            <div class="section">
+                <h2>Meus Cartões</h2>
+                <div id="lista-cartoes">
+                    <!-- Os cartões serão inseridos aqui dinamicamente -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const listaCartoes = document.getElementById('lista-cartoes');
+
+        function adicionarCartao() {
+            const nome = document.getElementById('nome-cartao').value;
+            const icone = document.getElementById('icone-cartao').value;
+            const limite = document.getElementById('limite-cartao').value;
+            const fechamento = document.getElementById('fechamento').value;
+            const vencimento = document.getElementById('vencimento').value;
+
+            // Criar um novo elemento de cartão
+            const cartao = document.createElement('div');
+            cartao.className = 'cartao';
+            cartao.innerHTML = `
+                <div>
+                    <img src="${icone}" alt="Ícone do Cartão">
+                    <strong>${nome}</strong>
+                    <p>Limite: R$ ${limite}</p>
+                    <p>Fechamento: Dia ${fechamento}</p>
+                    <p>Vencimento: Dia ${vencimento}</p>
+                </div>
+                <button onclick="removerCartao(this)">Remover</button>
+            `;
+
+            // Adicionar o cartão à lista
+            listaCartoes.appendChild(cartao);
+
+            // Limpar os campos do formulário
+            document.getElementById('nome-cartao').value = '';
+            document.getElementById('icone-cartao').value = '';
+            document.getElementById('limite-cartao').value = '';
+            document.getElementById('fechamento').value = '';
+            document.getElementById('vencimento').value = '';
+        }
+
+        function removerCartao(botao) {
+            // Remover o elemento do cartão
+            botao.parentElement.remove();
+        }
+
+
+        // Carregar cartões de crédito da localStorage e preencher o select
+        document.addEventListener('DOMContentLoaded', () => {
+            const cartoesSelect = document.getElementById('cartao');
+            const cartoes = JSON.parse(localStorage.getItem('cartoes')) || [];
+
+            cartoes.forEach(cartao => {
+                const option = document.createElement('option');
+                option.value = cartao.nome;
+                option.textContent = cartao.nome;
+                cartoesSelect.appendChild(option);
+            });
+        });
+
+        // Função para adicionar uma transação
+        function adicionarTransacao() {
+            const descricao = document.getElementById('descricao').value;
+            const valor = parseFloat(document.getElementById('valor').value);
+            const parcelas = parseInt(document.getElementById('parcelas').value, 10) || 1;
+            const categoria = document.getElementById('categoria').value;
+            const tipo = document.getElementById('tipo').value;
+            const data = document.getElementById('data').value;
+            const cartaoSelecionado = document.getElementById('cartao').value;
+
+            if (!descricao || isNaN(valor) || !data) {
+                alert("Por favor, preencha todos os campos obrigatórios!");
+                return;
+            }
+
+            // Calcular o valor total e as parcelas
+            const valorTotal = valor * parcelas;
+
+            // Se um cartão foi selecionado, descontar o valor do limite
+            if (cartaoSelecionado) {
+                const cartoes = JSON.parse(localStorage.getItem('cartoes')) || [];
+                const cartao = cartoes.find(c => c.nome === cartaoSelecionado);
+
+                if (cartao) {
+                    if (cartao.limiteDisponivel >= valorTotal) {
+                        cartao.limiteDisponivel -= valorTotal;
+                        localStorage.setItem('cartoes', JSON.stringify(cartoes));
+                        alert(`Transação adicionada com sucesso! Novo limite disponível no cartão ${cartao.nome}: R$ ${cartao.limiteDisponivel.toFixed(2)}`);
+                    } else {
+                        alert("Limite do cartão insuficiente para esta transação.");
+                        return;
+                    }
+                }
+            }
+
+            // Adicionar a transação à tabela
+            const tabela = document.getElementById('transacoes').querySelector('tbody');
+            const linha = tabela.insertRow();
+            linha.innerHTML = `
+                    <td>${descricao}</td>
+                    <td>R$ ${valor.toFixed(2)}</td>
+                    <td>${tipo}</td>
+                    <td>${categoria}</td>
+                    <td>${data}</td>
+                    <td>${parcelas}</td>
+                    <td>R$ ${valorTotal.toFixed(2)}</td>
+                    <td>Pago</td>
+                    <td><button onclick="removerTransacao(this)">Excluir</button></td>
+                `;
+        }
+
+        // Função para remover uma transação (opcional)
+        function removerTransacao(botao) {
+            const linha = botao.parentNode.parentNode;
+            linha.remove();
+        }
+
+
+    </script>
+</body>
+
+</html>

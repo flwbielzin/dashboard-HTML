@@ -161,3 +161,31 @@ $('#logIn').on('click', function(){
   });
 });
 });
+
+
+$(document).ready(function() {
+  $('#signUp').on('click', function() {
+    const username = $('#username-signup').val();
+    const email = $('#email').val();
+    const password = $('#password-signup').val();
+
+    // Enviar requisição POST para o backend
+    $.ajax({
+      url: 'http://100.87.218.90:3000/signup', // URL do endpoint de registro
+      method: 'POST',
+      contentType: 'application/json', // Indica que os dados estão em JSON
+      data: JSON.stringify({
+        username: username,
+        email: email,
+        password: password
+      }),
+      success: function(response) {
+        alert(response.message); // Exibe mensagem de sucesso
+        $('#goLeft').click();    // Troca para o formulário de login
+      },
+      error: function(xhr, status, error) {
+        alert(xhr.responseJSON?.error || "Erro ao registrar o usuário."); // Exibe erro
+      }
+    });
+  });
+});

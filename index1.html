@@ -52,15 +52,19 @@
                 <label for="data">Data de Compra:</label>
                 <input type="date" id="data">
 
-                <!-- Adicionado: Checkbox para marcar se é transação de cartão -->
+                <!-- Selecionar Cartão de Crédito -->
                 <label for="cartao">Cartão de Crédito:</label>
-                <input type="checkbox" id="cartao">
-
-                <!-- Adicionado: Campo para data de vencimento -->
-                <label for="vencimento">Data de Vencimento:</label>
-                <input type="date" id="vencimento">
+                <select id="cartao">
+                    <option value="">Nenhum</option>
+                    <!-- Os cartões serão adicionados dinamicamente -->
+                </select>
 
                 <button onclick="adicionarTransacao()">Adicionar Transação</button>
+            </div>
+
+            <!-- Botão para acessar a página de cartões -->
+            <div class="section">
+                <button onclick="window.location.href='./cartao.html'">Gerenciar Cartões</button>
             </div>
         </div>
 
@@ -96,6 +100,20 @@
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        // Carregar cartões de crédito da localStorage e preencher o select
+        document.addEventListener('DOMContentLoaded', () => {
+            const cartoesSelect = document.getElementById('cartao');
+            const cartoes = JSON.parse(localStorage.getItem('cartoes')) || [];
+
+            cartoes.forEach(cartao => {
+                const option = document.createElement('option');
+                option.value = cartao.nome;
+                option.textContent = cartao.nome;
+                cartoesSelect.appendChild(option);
+            });
+        });
+    </script>
 </body>
 
 </html>
